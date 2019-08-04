@@ -1,0 +1,108 @@
+<!-- TITLE -->
+<div class="mb-40 mt-40">
+    <h1>Manage User</h1>
+</div>
+
+<!-- SEARCH FORM -->
+<div class="card">
+
+    <div class="card-header">
+        <i class="fa fa-search"></i> Search
+    </div>
+    <div class="card-body">
+        <form #searchForm="ngForm">
+            <div class="row justify-content-md-center">
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <label for="title">Username</label>
+                        <input type="text" class="form-control" id="username" [(ngModel)]="search.username" name="username" #username="ngModel">
+                    </div>
+                    <div class="form-group">
+                        <label for="username">email</label>
+                        <input type="string" class="form-control" id="email" [(ngModel)]="search.email" name="email" #email="ngModel" >
+                    </div>
+                    <div class="form-group">
+                        <label for="username">fechaAlta</label>
+                        <input type="date" class="form-control" id="fechaalta" [(ngModel)]="search.fechaalta" name="fechaalta" #fechaalta="ngModel" >
+                    </div>
+                    <div class="form-group">
+                        <label for="username">flag</label>
+                        <input type="string" class="form-control" id="flag" [(ngModel)]="search.flag" name="flag" #flag="ngModel" >
+                    </div>
+                    <div class="form-group">
+                        <label for="username">hash</label>
+                        <input type="string" class="form-control" id="hash" [(ngModel)]="search.hash" name="hash" #hash="ngModel" >
+                    </div>
+                    <div class="form-group">
+                        <label for="username">lastLog</label>
+                        <input type="date" class="form-control" id="lastlog" [(ngModel)]="search.lastlog" name="lastlog" #lastlog="ngModel" >
+                    </div>
+                    <div class="form-group">
+                        <label for="username">level</label>
+                        <input type="integer" class="form-control" id="level" [(ngModel)]="search.level" name="level" #level="ngModel" >
+                    </div>
+                    <div class="form-group">
+                        <label for="username">nombres</label>
+                        <input type="string" class="form-control" id="nombres" [(ngModel)]="search.nombres" name="nombres" #nombres="ngModel" >
+                    </div>
+                    <div class="form-group">
+                        <label for="username">recibeOfertas</label>
+                        <input type="boolean" class="form-control" id="recibeofertas" [(ngModel)]="search.recibeofertas" name="recibeofertas" #recibeofertas="ngModel" >
+                    </div>
+                    <div class="form-group">
+                        <label for="username">telefono</label>
+                        <input type="string" class="form-control" id="telefono" [(ngModel)]="search.telefono" name="telefono" #telefono="ngModel" >
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Role</label>
+                        <input type="text" class="form-control" id="role" [(ngModel)]="search.role" name="role" #role="ngModel">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!-- TABLE LIST -->
+<table class="table table-hover mt-40">
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>FechaAlta</th>
+            <th>Flag</th>
+            <th>Hash</th>
+            <th>LastLog</th>
+            <th>Level</th>
+            <th>Nombres</th>
+            <th>RecibeOfertas</th>
+            <th>Telefono</th>
+            <th>Roles</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of users | search:{'username' : search.username, 'name' : search.name, 'surname' : search.surname, 'mail' : search.mail, 'roles' : search.role }">
+            <td><a [routerLink]="['/manage-users/', user._id]">{{user.username}}</a></td>
+            <td>{{user.email }}</td>
+            <td>{{user.fechaalta }}</td>
+            <td>{{user.flag }}</td>
+            <td>{{user.hash }}</td>
+            <td>{{user.lastlog }}</td>
+            <td>{{user.level }}</td>
+            <td>{{user.nombres }}</td>
+            <td>{{user.recibeofertas }}</td>
+            <td>{{user.telefono }}</td>
+            <td>
+                <span *ngFor="let role of user.roles" class="badge badge-pill badge-primary mr-2">{{role}}</span>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- BUTTON -->
+<button class="btn btn-primary text-center pull-right mb-20" routerLink="/manage-users/new">
+    <span>
+        <i class="fa fa-plus"></i>
+    </span>
+</button>
